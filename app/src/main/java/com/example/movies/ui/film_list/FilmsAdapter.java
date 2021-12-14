@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movies.Models.Film;
+import com.example.movies.OnItemClick;
 import com.example.movies.databinding.ItemFilmBinding;
 
 import java.util.ArrayList;
@@ -16,11 +17,16 @@ import java.util.List;
 public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHolder> {
 
     private List<Film> films = new ArrayList<>();
+    public static OnItemClick onItemClick;
+
+    public void setOnItemClick(OnItemClick onItemClick){
+        FilmsAdapter.onItemClick=onItemClick;
+    }
     public void setFilms(List<Film>films){
         this.films=films;
         notifyDataSetChanged();
-
     }
+
     @NonNull
     @Override
     public FilmsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,6 +57,7 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHol
         public void onBind(Film film) {
            binding.tvTitle.setText(film.getTitle());
            binding.tvDescription.setText(film.getDescription());
+           itemView.setOnClickListener(view->onItemClick.itemClick(film.getId()));
         }
     }
 

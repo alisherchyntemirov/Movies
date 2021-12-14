@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +22,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 public class FilmsFragment extends Fragment {
 
@@ -47,6 +47,9 @@ public class FilmsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.recyclerFilms.setAdapter(adapter);
+        getData();
+        sendDataId();
+
 
         App.apiService.getFilms(new OnFilmReadyCallBack() {
             @Override
@@ -66,5 +69,30 @@ public class FilmsFragment extends Fragment {
         });
   }
 
+    private void getData() {
+      App.apiService.getFilms(new OnFilmReadyCallBack() {
+          @Override
+          public void success(List<Film> list) {
+              adapter.setFilms(list);
+          }
 
+          @Override
+          public void onServerError() {
+
+          }
+
+          @Override
+          public void failure(String msg) {
+
+          }
+      });
+    }
+
+    private void sendDataId() {
+        adapter.setOnItemClick(position ->
+                Navigation.findNavController(requireView()).navigate(
+                        FilmsFragmentDirections.actionFilmsFragmentToFilmDetailFragment(position).setPosition(position)));
+    }
 }
+
+
