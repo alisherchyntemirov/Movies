@@ -10,10 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.movies.App;
 import com.example.movies.Models.Film;
 import com.example.movies.remole.OnFilmDetailCallBack;
 import com.example.movies.databinding.FragmentFilmDetailBinding;
+import com.example.movies.ui.film_list.FilmsAdapter;
 
 public class DetailFilmFragment extends Fragment {
 
@@ -42,9 +44,13 @@ public class DetailFilmFragment extends Fragment {
 
     private void getData() {
         App.apiService.getDetailFilms(id, new OnFilmDetailCallBack() {
+
             @Override
             public void success(Film model) {
                 Log.e("tag", "getData");
+                Glide.with(binding.imView)
+                        .load(model.getImage())
+                        .into(binding.imView);
                 binding.textTitle.setText(model.getTitle());
                 binding.director.setText(model.getDirector());
                 binding.producer.setText(model.getProducer());

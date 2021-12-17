@@ -19,6 +19,16 @@ public class Film {
     String release_date;
     @SerializedName("running_time")
     String running_time;
+    @SerializedName("image")
+    String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getDirector() {
         return director;

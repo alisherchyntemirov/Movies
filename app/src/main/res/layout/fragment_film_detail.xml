@@ -9,7 +9,6 @@
     <ImageView
         android:id="@+id/im_view"
         android:layout_width="200dp"
-        android:src="@drawable/movies"
         android:layout_height="200dp"
         android:layout_marginStart="93dp" />
 
@@ -72,7 +71,6 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:textSize="20sp" />
-
 
 </FrameLayout>
 
