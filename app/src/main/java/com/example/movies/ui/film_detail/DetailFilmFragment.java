@@ -51,11 +51,11 @@ public class DetailFilmFragment extends Fragment {
                 Glide.with(binding.imView)
                         .load(model.getImage())
                         .into(binding.imView);
-                binding.textTitle.setText(model.getTitle());
+                binding.titleName.setText(model.getTitle());
                 binding.director.setText(model.getDirector());
-                binding.producer.setText(model.getProducer());
-                binding.runningTime.setText(model.getRunning_time());
-                binding.releaseDate.setText(model.getRelease_date());
+                binding.titleProducer.setText(model.getProducer());
+                binding.titleRunningTime.setText(model.getRunning_time());
+                binding.titleReleaseDate.setText(model.getRelease_date());
             }
 
             @Override
